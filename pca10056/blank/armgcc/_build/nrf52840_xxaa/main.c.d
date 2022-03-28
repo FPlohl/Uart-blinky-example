@@ -7,9 +7,7 @@ _build/nrf52840_xxaa/main.c.o: ../../../main.c \
  /home/florijan/gnuarmemb/gcc-arm-none-eabi-9-2019-q4-major/arm-none-eabi/include/_newlib_version.h \
  /home/florijan/gnuarmemb/gcc-arm-none-eabi-9-2019-q4-major/arm-none-eabi/include/sys/_intsup.h \
  /home/florijan/gnuarmemb/gcc-arm-none-eabi-9-2019-q4-major/arm-none-eabi/include/sys/_stdint.h \
- ../../../../../../external/freertos/source/include/FreeRTOS.h \
- /home/florijan/gnuarmemb/gcc-arm-none-eabi-9-2019-q4-major/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h \
- ../../../config/FreeRTOSConfig.h \
+ ../../../../../../components/libraries/uart/app_uart.h \
  ../../../../../../components/libraries/util/app_util_platform.h \
  ../../../../../../modules/nrfx/mdk/compiler_abstraction.h \
  ../../../../../../modules/nrfx/mdk/nrf.h \
@@ -32,6 +30,7 @@ _build/nrf52840_xxaa/main.c.o: ../../../main.c \
  /home/florijan/gnuarmemb/gcc-arm-none-eabi-9-2019-q4-major/arm-none-eabi/include/sys/config.h \
  /home/florijan/gnuarmemb/gcc-arm-none-eabi-9-2019-q4-major/arm-none-eabi/include/machine/ieeefp.h \
  /home/florijan/gnuarmemb/gcc-arm-none-eabi-9-2019-q4-major/arm-none-eabi/include/sys/cdefs.h \
+ /home/florijan/gnuarmemb/gcc-arm-none-eabi-9-2019-q4-major/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h \
  /home/florijan/gnuarmemb/gcc-arm-none-eabi-9-2019-q4-major/lib/gcc/arm-none-eabi/9.2.1/include/stdarg.h \
  /home/florijan/gnuarmemb/gcc-arm-none-eabi-9-2019-q4-major/arm-none-eabi/include/sys/reent.h \
  /home/florijan/gnuarmemb/gcc-arm-none-eabi-9-2019-q4-major/arm-none-eabi/include/_ansi.h \
@@ -46,6 +45,8 @@ _build/nrf52840_xxaa/main.c.o: ../../../main.c \
  ../../../../../../components/drivers_nrf/nrf_soc_nosd/nrf_error.h \
  ../../../../../../components/libraries/util/nordic_common.h \
  ../../../../../../components/libraries/util/app_error_weak.h \
+ ../../../../../../external/freertos/source/include/FreeRTOS.h \
+ ../../../config/FreeRTOSConfig.h \
  ../../../../../../components/libraries/util/nrf_assert.h \
  ../../../../../../external/freertos/source/include/projdefs.h \
  ../../../../../../external/freertos/source/include/portable.h \
@@ -82,7 +83,10 @@ _build/nrf52840_xxaa/main.c.o: ../../../main.c \
  ../../../../../../integration/nrfx/legacy/nrf_drv_clock.h \
  ../../../../../../modules/nrfx/drivers/include/nrfx_clock.h \
  ../../../../../../modules/nrfx/hal/nrf_clock.h \
- ../../../../../../modules/nrfx/drivers/include/nrfx_power_clock.h
+ ../../../../../../modules/nrfx/drivers/include/nrfx_power_clock.h \
+ /home/florijan/gnuarmemb/gcc-arm-none-eabi-9-2019-q4-major/arm-none-eabi/include/string.h \
+ /home/florijan/gnuarmemb/gcc-arm-none-eabi-9-2019-q4-major/arm-none-eabi/include/sys/string.h \
+ ../../../../../../modules/nrfx/hal/nrf_uarte.h
 
 /home/florijan/gnuarmemb/gcc-arm-none-eabi-9-2019-q4-major/lib/gcc/arm-none-eabi/9.2.1/include/stdbool.h:
 
@@ -100,11 +104,7 @@ _build/nrf52840_xxaa/main.c.o: ../../../main.c \
 
 /home/florijan/gnuarmemb/gcc-arm-none-eabi-9-2019-q4-major/arm-none-eabi/include/sys/_stdint.h:
 
-../../../../../../external/freertos/source/include/FreeRTOS.h:
-
-/home/florijan/gnuarmemb/gcc-arm-none-eabi-9-2019-q4-major/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h:
-
-../../../config/FreeRTOSConfig.h:
+../../../../../../components/libraries/uart/app_uart.h:
 
 ../../../../../../components/libraries/util/app_util_platform.h:
 
@@ -150,6 +150,8 @@ _build/nrf52840_xxaa/main.c.o: ../../../main.c \
 
 /home/florijan/gnuarmemb/gcc-arm-none-eabi-9-2019-q4-major/arm-none-eabi/include/sys/cdefs.h:
 
+/home/florijan/gnuarmemb/gcc-arm-none-eabi-9-2019-q4-major/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h:
+
 /home/florijan/gnuarmemb/gcc-arm-none-eabi-9-2019-q4-major/lib/gcc/arm-none-eabi/9.2.1/include/stdarg.h:
 
 /home/florijan/gnuarmemb/gcc-arm-none-eabi-9-2019-q4-major/arm-none-eabi/include/sys/reent.h:
@@ -177,6 +179,10 @@ _build/nrf52840_xxaa/main.c.o: ../../../main.c \
 ../../../../../../components/libraries/util/nordic_common.h:
 
 ../../../../../../components/libraries/util/app_error_weak.h:
+
+../../../../../../external/freertos/source/include/FreeRTOS.h:
+
+../../../config/FreeRTOSConfig.h:
 
 ../../../../../../components/libraries/util/nrf_assert.h:
 
@@ -253,3 +259,9 @@ _build/nrf52840_xxaa/main.c.o: ../../../main.c \
 ../../../../../../modules/nrfx/hal/nrf_clock.h:
 
 ../../../../../../modules/nrfx/drivers/include/nrfx_power_clock.h:
+
+/home/florijan/gnuarmemb/gcc-arm-none-eabi-9-2019-q4-major/arm-none-eabi/include/string.h:
+
+/home/florijan/gnuarmemb/gcc-arm-none-eabi-9-2019-q4-major/arm-none-eabi/include/sys/string.h:
+
+../../../../../../modules/nrfx/hal/nrf_uarte.h:
