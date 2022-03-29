@@ -57,6 +57,7 @@ _build/nrf52840_xxaa/main.c.o: ../../../main.c \
  ../../../../../../external/freertos/source/include/mpu_wrappers.h \
  ../../../../../../external/freertos/source/include/task.h \
  ../../../../../../external/freertos/source/include/list.h \
+ ../../../../../../external/freertos/source/include/queue.h \
  ../../../../../../external/freertos/source/include/timers.h \
  ../../../../../../external/freertos/source/include/task.h \
  ../../../../../../components/libraries/bsp/bsp.h \
@@ -86,7 +87,15 @@ _build/nrf52840_xxaa/main.c.o: ../../../main.c \
  ../../../../../../modules/nrfx/drivers/include/nrfx_power_clock.h \
  /home/florijan/gnuarmemb/gcc-arm-none-eabi-9-2019-q4-major/arm-none-eabi/include/string.h \
  /home/florijan/gnuarmemb/gcc-arm-none-eabi-9-2019-q4-major/arm-none-eabi/include/sys/string.h \
- ../../../../../../modules/nrfx/hal/nrf_uarte.h
+ ../../../../../../modules/nrfx/hal/nrf_uarte.h \
+ ../../../../../../components/libraries/pwm/app_pwm.h \
+ ../../../../../../integration/nrfx/legacy/nrf_drv_timer.h \
+ ../../../../../../modules/nrfx/drivers/include/nrfx_timer.h \
+ ../../../../../../modules/nrfx/hal/nrf_timer.h \
+ ../../../../../../integration/nrfx/legacy/nrf_drv_ppi.h \
+ ../../../../../../modules/nrfx/drivers/include/nrfx_ppi.h \
+ ../../../../../../modules/nrfx/hal/nrf_ppi.h \
+ ../../../../../../components/libraries/delay/nrf_delay.h
 
 /home/florijan/gnuarmemb/gcc-arm-none-eabi-9-2019-q4-major/lib/gcc/arm-none-eabi/9.2.1/include/stdbool.h:
 
@@ -204,6 +213,8 @@ _build/nrf52840_xxaa/main.c.o: ../../../main.c \
 
 ../../../../../../external/freertos/source/include/list.h:
 
+../../../../../../external/freertos/source/include/queue.h:
+
 ../../../../../../external/freertos/source/include/timers.h:
 
 ../../../../../../external/freertos/source/include/task.h:
@@ -265,3 +276,19 @@ _build/nrf52840_xxaa/main.c.o: ../../../main.c \
 /home/florijan/gnuarmemb/gcc-arm-none-eabi-9-2019-q4-major/arm-none-eabi/include/sys/string.h:
 
 ../../../../../../modules/nrfx/hal/nrf_uarte.h:
+
+../../../../../../components/libraries/pwm/app_pwm.h:
+
+../../../../../../integration/nrfx/legacy/nrf_drv_timer.h:
+
+../../../../../../modules/nrfx/drivers/include/nrfx_timer.h:
+
+../../../../../../modules/nrfx/hal/nrf_timer.h:
+
+../../../../../../integration/nrfx/legacy/nrf_drv_ppi.h:
+
+../../../../../../modules/nrfx/drivers/include/nrfx_ppi.h:
+
+../../../../../../modules/nrfx/hal/nrf_ppi.h:
+
+../../../../../../components/libraries/delay/nrf_delay.h:
