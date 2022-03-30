@@ -20,7 +20,6 @@
 #include "app_pwm.h"
 #include "nrf_delay.h"
 
-
 #define TASK_DELAY        200               /**< Task delay. Delays a LED0 task for 200 ms */
 #define TIMER_PERIOD      1000              /**< Timer period. LED1 timer will expire after 1000 ms */
 
@@ -29,7 +28,6 @@ TimerHandle_t led1_toggle_timer_handle;     /**< Reference to LED1 toggling Free
 TaskHandle_t  pwm_task_handle;              /**< Reference for pwm FreeRTOS task. */
 
 QueueHandle_t pwm_Queue;
-
 
 #define MAX_TEST_DATA_BYTES     (15U)                /**< max number of test bytes to be used for tx and rx. */
 #define UART_TX_BUF_SIZE 256                         /**< UART TX buffer size. */
@@ -102,6 +100,12 @@ void uart_event_handle(app_uart_evt_t * p_event)
     }
 }
 
+static void button_handler(bsp_event_t event){
+    if (event == BSP_EVENT_KEY_0) {
+        bsp_board_led_invert(0);
+    }
+}
+
 static void pwm_function (void * pvParameter){
     UNUSED_PARAMETER(pvParameter);
     uint8_t pwm;
@@ -151,13 +155,13 @@ static void led_toggle_timer_callback (void * pvParameter)
 int main(void)
 {
     ret_code_t err_code;
-    bsp_board_init(BSP_INIT_LEDS);
+    bsp_init(BSP_INIT_LEDS | BSP_INIT_BUTTONS, button_handler);
     /* Initialize clock driver for better time accuracy in FREERTOS */
     err_code = nrf_drv_clock_init();
     APP_ERROR_CHECK(err_code);
 
     app_pwm_config_t pwm1_cfg = APP_PWM_DEFAULT_CONFIG_1CH(1000, BSP_LED_3);
-  
+
     err_code = app_pwm_init(&PWM1,&pwm1_cfg,pwm_ready_callback);
     APP_ERROR_CHECK(err_code);
     app_pwm_enable(&PWM1);

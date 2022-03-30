@@ -57,6 +57,7 @@ SRC_FILES += \
   $(SDK_ROOT)/integration/nrfx/legacy/nrf_drv_ppi.c \
   $(PROJ_DIR)/main.c \
   $(SDK_ROOT)/modules/nrfx/mdk/system_nrf52840.c \
+  
    
 
 # Include folders common to all targets
@@ -95,6 +96,7 @@ INC_FOLDERS += \
   $(SDK_ROOT)/components/libraries/fifo \
   $(SDK_ROOT)/components/libraries/pwm \
   $(SDK_ROOT)/components/libraries/delay \
+  $(SDK_ROOT)/components/libraries/button \
 
 # Libraries common to all targets
 LIB_FILES += \
