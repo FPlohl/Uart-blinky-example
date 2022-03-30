@@ -21,12 +21,12 @@
 #include "nrf_delay.h"
 
 
-#define TASK_DELAY        200           /**< Task delay. Delays a LED0 task for 200 ms */
-#define TIMER_PERIOD      1000          /**< Timer period. LED1 timer will expire after 1000 ms */
+#define TASK_DELAY        200               /**< Task delay. Delays a LED0 task for 200 ms */
+#define TIMER_PERIOD      1000              /**< Timer period. LED1 timer will expire after 1000 ms */
 
-TaskHandle_t  led2_toggle_task_handle;   /**< Reference to LED2 toggling FreeRTOS task. */
-TimerHandle_t led1_toggle_timer_handle;  /**< Reference to LED1 toggling FreeRTOS timer. */
-TaskHandle_t  pwm_task_handle;   /**< Reference for pwm FreeRTOS task. */
+TaskHandle_t  led2_toggle_task_handle;      /**< Reference to LED2 toggling FreeRTOS task. */
+TimerHandle_t led1_toggle_timer_handle;     /**< Reference to LED1 toggling FreeRTOS timer. */
+TaskHandle_t  pwm_task_handle;              /**< Reference for pwm FreeRTOS task. */
 
 QueueHandle_t pwm_Queue;
 
@@ -39,6 +39,8 @@ uint8_t rx_buff[100];
 uint8_t i;
 
 APP_PWM_INSTANCE(PWM1,1);                   // Create the instance "PWM1" using TIMER1.
+APP_PWM_INSTANCE(PWM2,2);
+
 void pwm_ready_callback(uint32_t pwm_id)    // PWM callback function
 {
     
@@ -93,6 +95,8 @@ void uart_event_handle(app_uart_evt_t * p_event)
             for (int i = 0; i < strlen(status); i++){
                 app_uart_put(status[i]);
             }
+            memset(rx_buff,0,100);
+            i = 0;
             xQueueSendToBackFromISR(pwm_Queue, (void *)&cr, &xHigherPriorityTaskWoken);            
         }
     }
@@ -113,10 +117,26 @@ static void pwm_function (void * pvParameter){
 static void led2_toggle_task_function (void * pvParameter)
 {
     UNUSED_PARAMETER(pvParameter);
+    uint8_t a = 0;
+    bool inc = 1;
     while (true)
     {
-        bsp_board_led_invert(BSP_BOARD_LED_2);
-        vTaskDelay(TASK_DELAY+100);
+        if(inc == 1){
+            a++;
+            if (a == 100){
+                inc = 0;
+            }      
+        } 
+        if (inc == 0){
+            a--;
+            if(a == 0){
+                inc = 1;
+            }
+        } 
+        //bsp_board_led_invert(BSP_BOARD_LED_2);
+        app_pwm_channel_duty_set(&PWM2, 0, a);
+        vTaskDelay(10);
+        
     }
 }
 
@@ -142,6 +162,11 @@ int main(void)
     APP_ERROR_CHECK(err_code);
     app_pwm_enable(&PWM1);
 
+    app_pwm_config_t pwm2_cfg = APP_PWM_DEFAULT_CONFIG_1CH(1000, BSP_LED_2);
+  
+    err_code = app_pwm_init(&PWM2,&pwm2_cfg,pwm_ready_callback);
+    APP_ERROR_CHECK(err_code);
+    app_pwm_enable(&PWM2);
 
     const app_uart_comm_params_t comm_params =
         {
