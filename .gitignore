@@ -8,6 +8,10 @@
 *.so
 *.hex
 *.d
+*.bin
+*.out
+*.in
+*.map
 
 # Logs #
 ########
