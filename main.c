@@ -35,6 +35,7 @@ QueueHandle_t pwm_Queue;
 
 uint8_t rx_buff[100];
 uint8_t i;
+bool state;
 
 APP_PWM_INSTANCE(PWM1,1);                   // Create the instance "PWM1" using TIMER1.
 APP_PWM_INSTANCE(PWM2,2);
@@ -101,8 +102,16 @@ void uart_event_handle(app_uart_evt_t * p_event)
 }
 
 static void button_handler(bsp_event_t event){
-    if (event == BSP_EVENT_KEY_0) {
-        bsp_board_led_invert(0);
+    switch (event)
+    {
+        case BSP_EVENT_KEY_0:
+            bsp_board_led_invert(0);
+            break;
+        case BSP_EVENT_KEY_1:
+            state = !state;
+            break;
+        default:
+            break;
     }
 }
 
@@ -147,7 +156,9 @@ static void led2_toggle_task_function (void * pvParameter)
 static void led_toggle_timer_callback (void * pvParameter)
 {
     UNUSED_PARAMETER(pvParameter);
-    bsp_board_led_invert(BSP_BOARD_LED_1);
+    if (state == true){
+        bsp_board_led_invert(BSP_BOARD_LED_1);
+    }
 }
 
 #define UART_HWFC APP_UART_FLOW_CONTROL_DISABLED
@@ -199,7 +210,6 @@ int main(void)
     UNUSED_VARIABLE(xTimerStart(led1_toggle_timer_handle, 0));
 
     pwm_Queue = xQueueCreate(3, sizeof(uint8_t));
-
     /* Activate deep sleep mode */
     SCB->SCR |= SCB_SCR_SLEEPDEEP_Msk;
 
